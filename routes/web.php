@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('employees', 'employees')->name('employees');
     Route::view('paklaring', 'paklaring')->name('paklaring');
     Route::view('settings', 'settings')->name('settings');
+    Route::view('users', 'users')->name('users');
     Route::view('activity-logs', 'activity-logs')->name('activity-logs');
 });
 
