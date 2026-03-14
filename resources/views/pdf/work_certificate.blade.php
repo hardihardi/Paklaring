@@ -7,209 +7,203 @@
         @page { margin: 0; }
         body {
             font-family: 'Helvetica', 'Arial', sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #1a202c;
             margin: 0;
             padding: 0;
             background-color: #ffffff;
         }
         .container {
-            padding: 50px 70px;
+            padding: 40px 60px;
             position: relative;
-        }
-        .border-outer {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid #e2e8f0;
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 3px double #2d3748;
-            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2d3748;
+            padding-bottom: 15px;
         }
         .logo {
-            height: 70px;
-            margin-bottom: 15px;
+            height: 60px;
+            margin-bottom: 10px;
         }
         .company-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2d3748;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .company-address {
-            font-size: 11px;
-            color: #718096;
-            margin-top: 5px;
-        }
-        .document-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .title {
             font-size: 22px;
             font-weight: bold;
-            text-decoration: underline;
-            margin-bottom: 8px;
             color: #1a202c;
+            text-transform: uppercase;
         }
-        .cert-number {
-            font-size: 13px;
+        .company-address {
+            font-size: 10px;
             color: #4a5568;
+        }
+        .doc-header {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .doc-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 5px;
+        }
+        .doc-number {
+            font-size: 12px;
             font-family: 'Courier', monospace;
         }
-        .content {
-            margin-bottom: 40px;
-            text-align: justify;
-            font-size: 14px;
-        }
-        .details-container {
-            margin: 30px 0;
-            padding-left: 20px;
+        .section-intro {
+            margin-top: 40px;
+            font-size: 13px;
         }
         .details-table {
             width: 100%;
+            margin: 25px 0 25px 30px;
+            font-size: 13px;
         }
         .details-table td {
-            padding: 8px 0;
-            vertical-align: top;
+            padding: 4px 0;
         }
         .label {
             font-weight: bold;
-            width: 180px;
+            width: 160px;
+        }
+        .main-content {
+            font-size: 13px;
+            text-align: justify;
+            margin-bottom: 30px;
         }
         .closing {
-            margin-top: 30px;
-        }
-        .footer {
-            margin-top: 60px;
-            width: 100%;
+            font-size: 13px;
+            margin-bottom: 50px;
         }
         .footer-table {
             width: 100%;
+            margin-top: 40px;
         }
-        .signature-box {
+        .qr-section {
+            width: 40%;
+            vertical-align: bottom;
+        }
+        .sign-section {
+            width: 60%;
             text-align: center;
-            width: 50%;
+        }
+        .sign-location {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .sign-container {
+            height: 100px;
             position: relative;
+            display: block;
+            margin: 10px auto;
         }
-        .qr-box {
-            text-align: left;
-            width: 50%;
-        }
-        .signature-img {
-            height: 90px;
-            margin: 10px 0;
+        .sign-img {
+            height: 80px;
+            position: relative;
+            z-index: 2;
         }
         .stamp-img {
-            height: 120px;
+            height: 110px;
             position: absolute;
             left: 50%;
             top: 50%;
-            margin-left: -60px;
-            margin-top: -60px;
-            opacity: 0.75;
-            z-index: -1;
+            margin-left: -55px;
+            margin-top: -55px;
+            opacity: 0.7;
+            z-index: 1;
         }
-        .qr-code {
-            border: 1px solid #edf2f7;
-            padding: 5px;
-            background: #fff;
-        }
-        .qr-text {
-            font-size: 9px;
-            color: #a0aec0;
-            margin-top: 8px;
-            font-style: italic;
-        }
-        .hr-name {
+        .signer-name {
             font-weight: bold;
             text-decoration: underline;
-            margin-top: 10px;
+            font-size: 14px;
+        }
+        .signer-pos {
+            font-size: 11px;
+            color: #4a5568;
+        }
+        .qr-box {
+            padding: 5px;
+            border: 1px solid #e2e8f0;
+            display: inline-block;
+            background: #fff;
+        }
+        .qr-hint {
+            font-size: 8px;
+            color: #718096;
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="border-outer"></div>
     <div class="container">
         <div class="header">
             @if($settings && $settings->company_logo)
                 <img src="{{ public_path('storage/' . $settings->company_logo) }}" class="logo">
             @endif
             <div class="company-name">{{ $settings->company_name ?? 'PT BUMAME FARMASI' }}</div>
-            <div class="company-address">{{ $settings->company_address ?? 'Jl. TB Simatupang No. 34, Jakarta Selatan' }}</div>
+            <div class="company-address">{{ $settings->company_address ?? 'Jakarta, Indonesia' }}</div>
         </div>
 
-        <div class="document-title">
-            <div class="title">SURAT KETERANGAN KERJA</div>
-            <div class="cert-number">Nomor: {{ $certificate->certificate_number }}</div>
+        <div class="doc-header">
+            <div class="doc-title">SURAT KETERANGAN KERJA</div>
+            <div class="doc-number">Nomor: {{ $certificate->certificate_number }}</div>
         </div>
 
-        <div class="content">
-            <p>Yang bertanda tangan di bawah ini, atas nama manajemen <strong>{{ $settings->company_name ?? 'BUMAME' }}</strong>, dengan ini menerangkan bahwa:</p>
-
-            <div class="details-container">
-                <table class="details-table">
-                    <tr>
-                        <td class="label">Nama Lengkap</td>
-                        <td>: {{ $certificate->employee->full_name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">Nomor Induk Karyawan</td>
-                        <td>: {{ $certificate->employee->employee_id }}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">Jabatan Terakhir</td>
-                        <td>: {{ $certificate->employee->position->position_name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">Departemen</td>
-                        <td>: {{ $certificate->employee->department->department_name }}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <p>Benar telah bekerja di {{ $settings->company_name ?? 'perusahaan kami' }} terhitung sejak bergabung hingga tanggal penerbitan surat ini. Selama masa kerjanya, yang bersangkutan telah menunjukkan dedikasi, loyalitas, dan integritas yang baik dalam menjalankan tugas dan tanggung jawabnya.</p>
-
-            <p class="closing">Kami mengucapkan terima kasih atas kontribusi yang telah diberikan selama ini dan mendoakan kesuksesan di masa yang akan datang.</p>
-            <p>Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+        <div class="section-intro">
+            <p>Yang bertanda tangan di bawah ini menerangkan bahwa:</p>
         </div>
 
-        <div class="footer">
-            <table class="footer-table">
-                <tr>
-                    <td class="qr-box">
-                        <div class="qr-code">
-                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(110)->margin(0)->generate(url('/verify/' . $certificate->certificate_number))) !!} ">
-                        </div>
-                        <div class="qr-text">Dokumen ini diterbitkan secara digital.<br>Scan QR Code untuk verifikasi keaslian.</div>
-                    </td>
-                    <td class="signature-box">
-                        <p>Jakarta, {{ date('d F Y', strtotime($certificate->issued_date)) }}</p>
-                        <p style="margin-bottom: 5px;">Hormat kami,</p>
+        <table class="details-table">
+            <tr>
+                <td class="label">Nama Lengkap</td>
+                <td>: {{ $certificate->employee->full_name }}</td>
+            </tr>
+            <tr>
+                <td class="label">NIK / Employee ID</td>
+                <td>: {{ $certificate->employee->employee_id }}</td>
+            </tr>
+            <tr>
+                <td class="label">Jabatan Terakhir</td>
+                <td>: {{ $certificate->employee->position->position_name }}</td>
+            </tr>
+        </table>
 
-                        <div style="height: 100px; display: flex; align-items: center; justify-content: center; position: relative;">
-                            @if($settings && $settings->company_stamp)
-                                <img src="{{ public_path('storage/' . $settings->company_stamp) }}" class="stamp-img">
-                            @endif
-                            @if($settings && $settings->signature_image)
-                                <img src="{{ public_path('storage/' . $settings->signature_image) }}" class="signature-img">
-                            @else
-                                <div style="height: 80px;"></div>
-                            @endif
-                        </div>
-
-                        <div class="hr-name">Human Resources Manager</div>
-                        <div style="font-size: 13px; font-weight: bold;">{{ $settings->company_name ?? 'BUMAME' }}</div>
-                    </td>
-                </tr>
-            </table>
+        <div class="main-content">
+            {!! nl2br(e($certificate->content)) !!}
         </div>
+
+        <div class="closing">
+            <p>Demikian surat keterangan ini diterbitkan untuk dapat dipergunakan sebagaimana mestinya.</p>
+        </div>
+
+        <table class="footer-table">
+            <tr>
+                <td class="qr-section">
+                    <div class="qr-box">
+                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(url('/verify/' . $certificate->certificate_number))) !!} ">
+                    </div>
+                    <div class="qr-hint">Scan untuk verifikasi dokumen resmi</div>
+                </td>
+                <td class="sign-section">
+                    <div class="sign-location">{{ $settings->letter_location ?? 'Jakarta' }}, {{ date('d F Y', strtotime($certificate->issued_date)) }}</div>
+                    <div class="sign-label">Hormat kami,</div>
+                    <div class="sign-container">
+                        @if($settings && $settings->company_stamp)
+                            <img src="{{ public_path('storage/' . $settings->company_stamp) }}" class="stamp-img">
+                        @endif
+                        @if($settings && $settings->signature_image)
+                            <img src="{{ public_path('storage/' . $settings->signature_image) }}" class="sign-img">
+                        @else
+                            <div style="height: 80px;"></div>
+                        @endif
+                    </div>
+                    <div class="signer-name">{{ $settings->signer_name ?? 'HR Manager' }}</div>
+                    <div class="signer-pos">{{ $settings->signer_position ?? 'Human Resource Department' }}</div>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

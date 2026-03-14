@@ -15,14 +15,14 @@ class VerificationController extends Controller
             ->first();
 
         if (!$cert) {
-            return response()->json(['valid' => false], 404);
+            return response()->json(['valid' => false, 'message' => 'Dokumen tidak ditemukan'], 404);
         }
 
         return response()->json([
             'valid' => true,
-            'employee_name' => $cert->employee->full_name,
+            'employee' => $cert->employee->full_name,
             'position' => $cert->employee->position->position_name,
-            'company' => 'Bumame',
+            'company' => \App\Models\AppSetting::first()->company_name ?? 'Bumame',
             'issued_date' => $cert->issued_date,
         ]);
     }

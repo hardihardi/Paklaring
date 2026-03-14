@@ -17,24 +17,9 @@ class WorkCertificateRepository
             ->paginate($limit);
     }
 
-    public function find($id)
-    {
-        return WorkCertificate::findOrFail($id);
-    }
+    public function find($id) { return WorkCertificate::findOrFail($id); }
 
-    public function create(array $data)
-    {
-        return WorkCertificate::create($data);
-    }
-
-    public function generateNumber($date)
-    {
-        $year = date('Y', strtotime($date));
-        $month = date('m', strtotime($date));
-        $count = WorkCertificate::whereYear('issued_date', $year)->count() + 1;
-
-        return sprintf('SKK/BUMAME/HR/%s/%s/%04d', $year, $month, $count);
-    }
+    public function create(array $data) { return WorkCertificate::create($data); }
 
     public function delete($id)
     {
