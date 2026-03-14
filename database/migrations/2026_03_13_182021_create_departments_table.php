@@ -8,11 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('department_name');
-            $table->timestamps();
-        });
+        // Tambahkan pengecekan if di sini
+        if (!Schema::hasTable('departments')) {
+            Schema::create('departments', function (Blueprint $table) {
+                $table->id();
+                $table->string('department_name');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void
