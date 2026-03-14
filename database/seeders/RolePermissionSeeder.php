@@ -10,6 +10,9 @@ class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
         // Create permissions
         $permissions = [
             'manage_departments',
@@ -23,14 +26,14 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
         // Create roles and assign permissions
-        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
+        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'web']);
         $superAdmin->syncPermissions(Permission::all());
 
-        $hrAdmin = Role::firstOrCreate(['name' => 'HR Admin']);
+        $hrAdmin = Role::firstOrCreate(['name' => 'HR Admin', 'guard_name' => 'web']);
         $hrAdmin->syncPermissions([
             'create_employee',
             'edit_employee',
@@ -38,7 +41,7 @@ class RolePermissionSeeder extends Seeder
             'download_certificate',
         ]);
 
-        $hrManager = Role::firstOrCreate(['name' => 'HR Manager']);
+        $hrManager = Role::firstOrCreate(['name' => 'HR Manager', 'guard_name' => 'web']);
         $hrManager->syncPermissions([
             'create_certificate',
             'download_certificate',
