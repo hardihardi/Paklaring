@@ -8,11 +8,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('positions', function (Blueprint $table) {
-            $table->id();
-            $table->string('position_name');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('positions')) {
+            Schema::create('positions', function (Blueprint $table) {
+                $table->id();
+                $table->string('position_name');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void

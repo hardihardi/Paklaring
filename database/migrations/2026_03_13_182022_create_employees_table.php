@@ -8,14 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->string('employee_id')->unique();
-            $table->string('full_name');
-            $table->foreignId('department_id')->constrained()->onDelete('cascade');
-            $table->foreignId('position_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('employees')) {
+            Schema::create('employees', function (Blueprint $table) {
+                $table->id();
+                $table->string('employee_id')->unique();
+                $table->string('full_name');
+                $table->date('joined_date')->nullable();
+                $table->enum('employment_status', ['PKWT', 'PKWTT', 'Internship'])->default('PKWT');
+                $table->foreignId('department_id')->constrained()->onDelete('cascade');
+                $table->foreignId('position_id')->constrained()->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void

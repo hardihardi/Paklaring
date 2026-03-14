@@ -9,21 +9,39 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->date('joined_date')->nullable();
-            $table->enum('employment_status', ['PKWT', 'PKWTT', 'Internship'])->default('PKWT');
+            if (!Schema::hasColumn('employees', 'joined_date')) {
+                $table->date('joined_date')->nullable();
+            }
+            if (!Schema::hasColumn('employees', 'employment_status')) {
+                $table->enum('employment_status', ['PKWT', 'PKWTT', 'Internship'])->default('PKWT');
+            }
         });
 
         Schema::table('work_certificates', function (Blueprint $table) {
-            $table->date('end_date')->nullable();
-            $table->text('content')->nullable();
+            if (!Schema::hasColumn('work_certificates', 'end_date')) {
+                $table->date('end_date')->nullable();
+            }
+            if (!Schema::hasColumn('work_certificates', 'content')) {
+                $table->text('content')->nullable();
+            }
         });
 
         Schema::table('app_settings', function (Blueprint $table) {
-            $table->string('favicon')->nullable();
-            $table->string('app_name')->nullable();
-            $table->string('letter_location')->nullable();
-            $table->string('signer_name')->nullable();
-            $table->string('signer_position')->nullable();
+            if (!Schema::hasColumn('app_settings', 'favicon')) {
+                $table->string('favicon')->nullable();
+            }
+            if (!Schema::hasColumn('app_settings', 'app_name')) {
+                $table->string('app_name')->nullable();
+            }
+            if (!Schema::hasColumn('app_settings', 'letter_location')) {
+                $table->string('letter_location')->nullable();
+            }
+            if (!Schema::hasColumn('app_settings', 'signer_name')) {
+                $table->string('signer_name')->nullable();
+            }
+            if (!Schema::hasColumn('app_settings', 'signer_position')) {
+                $table->string('signer_position')->nullable();
+            }
         });
     }
 

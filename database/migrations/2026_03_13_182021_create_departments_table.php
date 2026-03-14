@@ -8,7 +8,6 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Tambahkan pengecekan if di sini
         if (!Schema::hasTable('departments')) {
             Schema::create('departments', function (Blueprint $table) {
                 $table->id();
